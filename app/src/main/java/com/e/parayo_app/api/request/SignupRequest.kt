@@ -8,6 +8,9 @@ class SignupRequest (
     val password : String?,
     val name : String?
     ){
+    /*  유효성 검사
+     *  빈 칸 확인, 이메일, 비밀번호, 이름 양식 확인
+     */
     fun isNotValidEmail() =
         email.isNullOrBlank()
                 || !Patterns.EMAIL_ADDRESS.matcher(email).matches()
