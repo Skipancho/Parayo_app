@@ -56,6 +56,18 @@ class SignupActivityUI(
                 bottomMargin = dip(20)
             }
 
+            textInputLayout{
+                textInputEditText{
+                    hint = "Name"
+                    setSingleLine()
+                    bindString(ui.owner, viewModel.name)
+                }
+            }.lparams(width = matchParent){
+                marginStart = dip(20)
+                marginEnd = dip(20)
+                bottomMargin = dip(20)
+            }
+
             button("회원 가입"){
                 onClick { viewModel.signup() }
             }.lparams(width = matchParent){
