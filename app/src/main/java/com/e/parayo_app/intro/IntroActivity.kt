@@ -5,8 +5,13 @@ import android.os.Bundle
 import android.util.Log
 import com.e.parayo_app.R
 import com.e.parayo_app.api.ParayoApi
+import com.e.parayo_app.signup.SingupActivity
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.anko.setContentView
+import org.jetbrains.anko.startActivity
 
 class IntroActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,13 +20,19 @@ class IntroActivity : AppCompatActivity() {
         val ui = IntroActivityUI()
         ui.setContentView(this)
 
-        runBlocking {
+        /*runBlocking {
             try {
                 val response = ParayoApi.instance.hello()
                 Log.d("IntroActivity", response.data!!)
             }catch (e : Exception){
                 Log.d("IntroActivity","Hello Api 호출 오류",e)
             }
+        }*/
+
+        GlobalScope.launch {
+            delay(1000)
+            startActivity<SingupActivity>()
+            finish()
         }
     }
 }
