@@ -2,14 +2,10 @@ package com.e.parayo_app.intro
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import com.e.parayo_app.R
-import com.e.parayo_app.api.ParayoApi
-import com.e.parayo_app.signup.SingupActivity
+import com.e.parayo_app.signin.SigninActivity
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import org.jetbrains.anko.setContentView
 import org.jetbrains.anko.startActivity
 
@@ -31,7 +27,7 @@ class IntroActivity : AppCompatActivity() {
 
         GlobalScope.launch {
             delay(1000)
-            startActivity<SingupActivity>()
+            startActivity<SigninActivity>()
             finish()
         }
     }

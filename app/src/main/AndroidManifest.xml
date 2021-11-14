@@ -11,9 +11,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Parayo_app"
-        android:usesCleartextTraffic="true">
+        android:name=".App"
+        android:usesCleartextTraffic="true"
+        >
         <activity
-            android:name=".signup.SingupActivity"
+            android:name=".signup.SignupActivity"
+            android:exported="true" />
+        <activity
+            android:name=".signin.SigninActivity"
             android:exported="true" />
         <activity
             android:name=".intro.IntroActivity"
