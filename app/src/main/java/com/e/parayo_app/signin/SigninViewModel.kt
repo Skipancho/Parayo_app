@@ -7,6 +7,7 @@ import com.e.parayo_app.api.request.SigninRequest
 import com.e.parayo_app.api.response.ApiResponse
 import com.e.parayo_app.api.response.SigninResponse
 import com.e.parayo_app.common.Prefs
+import com.e.parayo_app.product.ProductMainActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import net.codephobia.ankomvvm.lifecycle.BaseViewModel
@@ -59,6 +60,7 @@ class SigninViewModel(app : Application) : BaseViewModel(app) {
             Prefs.userId = response.data.userId
 
             toast("로그인되었습니다.")
+            startActivityAndFinish<ProductMainActivity>()
         } else{
             toast(response.message ?: "알 수 없는 오류가 발생했습니다.")
         }

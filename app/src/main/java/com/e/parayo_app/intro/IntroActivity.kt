@@ -2,6 +2,8 @@ package com.e.parayo_app.intro
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.e.parayo_app.common.Prefs
+import com.e.parayo_app.product.ProductMainActivity
 import com.e.parayo_app.signin.SigninActivity
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -26,8 +28,12 @@ class IntroActivity : AppCompatActivity() {
         }*/
 
         GlobalScope.launch {
-            delay(1000)
-            startActivity<SigninActivity>()
+            delay(1500)
+            if(Prefs.token.isNullOrEmpty()){
+                startActivity<SigninActivity>()
+            } else{
+                startActivity<ProductMainActivity>()
+            }
             finish()
         }
     }
