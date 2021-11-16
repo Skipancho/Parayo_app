@@ -21,6 +21,9 @@
             android:name=".signin.SigninActivity"
             android:exported="true" />
         <activity
+            android:name=".product.ProductMainActivity"
+            android:exported="true" />
+        <activity
             android:name=".intro.IntroActivity"
             android:exported="true">
             <intent-filter>
