@@ -14,7 +14,9 @@ import com.e.parayo_app.view.borderBottom
 import com.google.android.material.navigation.NavigationView
 import org.jetbrains.anko.*
 import org.jetbrains.anko.appcompat.v7.toolbar
+import org.jetbrains.anko.design.floatingActionButton
 import org.jetbrains.anko.design.navigationView
+import org.jetbrains.anko.sdk27.coroutines.onClick
 import org.jetbrains.anko.support.v4.drawerLayout
 
 class ProductMainUI(
@@ -30,18 +32,31 @@ class ProductMainUI(
     override fun createView(ui: AnkoContext<ProductMainActivity>) =
         ui.drawerLayout {
             drawerLayout = this
-            verticalLayout {
-                toolBar = toolbar{
-                    title = "Parayo"
-                    bottomPadding = dip(1)
-                    background = borderBottom(width = dip(1))
-                    menu.add("Search")
-                        .setIcon(R.drawable.ic_baseline_search_24)
-                        .setShowAsAction(SHOW_AS_ACTION_ALWAYS)
-                }.lparams(matchParent, wrapContent)
+            frameLayout{
+                verticalLayout {
+                    toolBar = toolbar{
+                        title = "Parayo"
+                        bottomPadding = dip(1)
+                        background = borderBottom(width = dip(1))
+                        menu.add("Search")
+                            .setIcon(R.drawable.ic_baseline_search_24)
+                            .setShowAsAction(SHOW_AS_ACTION_ALWAYS)
+                    }.lparams(matchParent, wrapContent)
 
-            }.lparams(matchParent, matchParent)
 
+
+
+                }.lparams(matchParent, matchParent)
+
+                floatingActionButton {
+                    imageResource = R.drawable.ic_baseline_add_circle_24
+                    onClick { viewModel.openRegistrationActivity() }
+                }.lparams{
+                    bottomMargin = dip(20)
+                    marginEnd = dip(20)
+                    gravity = Gravity.END or Gravity.BOTTOM
+                }
+            }
             navigationView = navigationView {
                 ProductMainNavHeader()
                     .createView(AnkoContext.create(context, this))
