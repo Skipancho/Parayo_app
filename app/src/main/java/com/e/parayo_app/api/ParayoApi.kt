@@ -1,11 +1,13 @@
 package com.e.parayo_app.api
 
+import com.e.parayo_app.api.request.ProductRegistrationRequest
 import com.e.parayo_app.api.request.SigninRequest
 import com.e.parayo_app.api.request.SignupRequest
 import com.e.parayo_app.api.response.ApiResponse
 import com.e.parayo_app.api.response.ProductImageUploadResponse
 import com.e.parayo_app.api.response.SigninResponse
 import okhttp3.MultipartBody
+import retrofit2.Response
 import retrofit2.http.*
 
 interface ParayoApi {
@@ -32,6 +34,11 @@ interface ParayoApi {
     suspend fun uploadProductImages(
         @Part images: MultipartBody.Part
     ): ApiResponse<ProductImageUploadResponse>
+
+    @POST("/api/v1/products")
+    suspend fun registerProduct(
+        @Body request: ProductRegistrationRequest
+    ): ApiResponse<Response<Void>>
 
 
     companion object{

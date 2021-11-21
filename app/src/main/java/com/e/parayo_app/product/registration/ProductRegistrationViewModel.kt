@@ -5,11 +5,13 @@ import android.app.Application
 import android.content.Intent
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.e.parayo_app.api.request.ProductRegistrationRequest
 import com.e.parayo_app.api.response.ApiResponse
 import com.e.parayo_app.api.response.ProductImageUploadResponse
 import com.e.parayo_app.product.category.categoryList
 import kotlinx.coroutines.launch
 import net.codephobia.ankomvvm.lifecycle.BaseViewModel
+import retrofit2.Response
 
 class ProductRegistrationViewModel(app : Application) : BaseViewModel(app){
 
@@ -98,6 +100,34 @@ class ProductRegistrationViewModel(app : Application) : BaseViewModel(app){
             toast(response.message ?: "알 수 없는 오류가 발생했습니다.")
         }
     }
+
+    suspend fun register(){
+        val request = extractRequest()
+        val response = ProductRegister().register(request)
+        onRegistrationResponse(response)
+    }
+
+    private fun extractRequest():ProductRegistrationRequest =
+        ProductRegistrationRequest(
+            productName.value,
+            description.value,
+            price.value?.toIntOrNull(),
+            categoryIdSelected,
+            imageIds
+        )
+
+    private fun onRegistrationResponse(
+        response: ApiResponse<Response<Void>>
+    ){
+        if (response.success){
+            confirm("상품이 등록되었습니다."){
+                finishActivity()
+            }
+        }else{
+            toast(response.message ?: "알 수 없는 오류가 발생했습니다.")
+        }
+    }
+
 
     companion object{
         const val REQUEST_PICK_IMAGES = 0
