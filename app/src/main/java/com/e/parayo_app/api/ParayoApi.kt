@@ -3,10 +3,10 @@ package com.e.parayo_app.api
 import com.e.parayo_app.api.request.SigninRequest
 import com.e.parayo_app.api.request.SignupRequest
 import com.e.parayo_app.api.response.ApiResponse
+import com.e.parayo_app.api.response.ProductImageUploadResponse
 import com.e.parayo_app.api.response.SigninResponse
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
+import okhttp3.MultipartBody
+import retrofit2.http.*
 
 interface ParayoApi {
 
@@ -27,6 +27,11 @@ interface ParayoApi {
     @POST("/api/v1/signin")
     suspend fun signin(@Body signinRequest: SigninRequest):ApiResponse<SigninResponse>
 
+    @Multipart
+    @POST("/api/v1/product_images")
+    suspend fun uploadProductImages(
+        @Part images: MultipartBody.Part
+    ): ApiResponse<ProductImageUploadResponse>
 
 
     companion object{
