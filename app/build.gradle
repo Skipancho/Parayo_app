@@ -70,4 +70,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"
     implementation 'com.github.benimario:ankomvvm:0.1.0'
 
+    //glide 온라인 이미지 표시 라이브러리
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+
 }

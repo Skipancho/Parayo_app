@@ -1,12 +1,23 @@
 package com.e.parayo_app.product.registration
 
+import android.graphics.Color
+import android.text.InputType
 import android.view.Gravity
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
+import com.bumptech.glide.Glide
 import com.e.parayo_app.R
+import com.e.parayo_app.api.ApiGenerator
+import net.codephobia.ankomvvm.databinding.bindString
+import net.codephobia.ankomvvm.databinding.bindStringEntries
+import net.codephobia.ankomvvm.databinding.bindUrl
 import org.jetbrains.anko.*
+import org.jetbrains.anko.design.textInputEditText
+import org.jetbrains.anko.design.textInputLayout
 import org.jetbrains.anko.sdk27.coroutines.onClick
+import org.jetbrains.anko.sdk27.coroutines.onItemSelectedListener
+import org.jetbrains.anko.sdk27.coroutines.textChangedListener
 
 class ProductRegistrationUI(
     private val viewModel: ProductRegistrationViewModel
@@ -30,6 +41,101 @@ class ProductRegistrationUI(
                     pickImageView(ui, 3)
                 }
 
+                textView("상품명 및 설명"){
+                    topPadding = dip(40)
+                    textSize = 16f
+                    textColorResource = R.color.purple_200
+                }
+
+                textInputLayout {
+                    topPadding = dip(20)
+                    textInputEditText {
+                        hint = "상품명"
+                        setSingleLine()
+                        bindString(ui.owner, viewModel.productName)
+
+                        textChangedListener {
+                            onTextChanged { _, _, _, _ ->
+                                viewModel.checkProductNameLength()
+                            }
+                        }
+                    }
+                    textView("0/40"){
+                        leftPadding = dip(4)
+                        textSize = 12f
+                        textColorResource = R.color.purple_200
+                        bindString(ui.owner, viewModel.productNameLength)
+                    }
+                }
+
+                textInputLayout {
+                    topPadding = dip(20)
+                    textInputEditText {
+                        hint = "상품 설명"
+                        maxLines = 6
+                        bindString(ui.owner, viewModel.description)
+                        textChangedListener {
+                            onTextChanged { _, _, _, _ ->
+                                viewModel.checkDescriptionLength()
+                            }
+                        }
+                    }
+                    textView("0/500"){
+                        leftPadding = dip(4)
+                        textSize = 12f
+                        textColorResource = R.color.purple_200
+                        bindString(ui.owner, viewModel.descriptionLength)
+                    }
+                }
+
+                textView("카테고리"){
+                    topPadding = dip(40)
+                    textSize = 16f
+                    textColorResource = R.color.purple_200
+                }
+
+                verticalLayout {
+                    topPadding = dip(12)
+                    bottomPadding = dip(12)
+                    backgroundColor = 0xEEEEEEEE.toInt()
+
+                    spinner {
+                        bindStringEntries(ui.owner, viewModel.categories)
+
+                        onItemSelectedListener {
+                            onItemSelected { _, _, position, _ ->
+                                viewModel.onCategorySelect(position)
+                            }
+                        }
+                    }
+                }.lparams(matchParent){
+                    topMargin = dip(20)
+                }
+
+                textView("판매 가격"){
+                    topPadding = dip(40)
+                    textSize = 16f
+                    textColorResource = R.color.purple_200
+                }
+
+                textInputLayout {
+                    topPadding = dip(20)
+                    textInputEditText {
+                        hint = "Ex) 1000"
+                        setSingleLine()
+                        inputType = InputType.TYPE_CLASS_NUMBER
+                        bindString(ui.owner, viewModel.price)
+                    }
+                }
+
+                button("상품 등록"){
+                    backgroundColorResource = R.color.purple_200
+                    textColor = Color.WHITE
+                    onClick{viewModel.register()}
+                }.lparams(matchParent, wrapContent){
+                    topMargin = dip(40)
+                }
+
             }
         }
 
@@ -41,5 +147,14 @@ class ProductRegistrationUI(
         backgroundColor = 0xFFEEEEEE.toInt()
 
         onClick { viewModel.pickImage(imageNum) }
+        bindUrl(ui.owner, viewModel.imageUrls[imageNum]){
+            it?.let {
+                scaleType = ImageView.ScaleType.CENTER_CROP
+                Glide.with(this)
+                    .load("${ApiGenerator.HOST}$it")
+                    .centerCrop()
+                    .into(this)
+            }
+        }
     }.lparams(dip(60),dip(60))
 }

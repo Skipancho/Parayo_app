@@ -27,7 +27,7 @@ class ProductRegistrationViewModel(app : Application) : BaseViewModel(app){
     val productName = MutableLiveData("")
     val description = MutableLiveData("")
     val price = MutableLiveData("")
-    val category = MutableLiveData(categoryList.map { it.name })
+    val categories = MutableLiveData(categoryList.map { it.name })
     var categoryIdSelected : Int? = categoryList[0].id
 
     val productNameLimit = 40
