@@ -3,21 +3,25 @@ package com.e.parayo_app.product
 import android.view.Gravity
 import android.view.Menu.NONE
 import android.view.MenuItem
-import  android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.core.internal.view.SupportMenuItem.SHOW_AS_ACTION_ALWAYS
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.viewpager.widget.ViewPager
 import com.e.parayo_app.R
 import com.e.parayo_app.common.Prefs
 import com.e.parayo_app.signin.SigninActivity
 import com.e.parayo_app.view.borderBottom
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayout.*
 import org.jetbrains.anko.*
 import org.jetbrains.anko.appcompat.v7.toolbar
 import org.jetbrains.anko.design.floatingActionButton
 import org.jetbrains.anko.design.navigationView
+import org.jetbrains.anko.design.themedTabLayout
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import org.jetbrains.anko.support.v4.drawerLayout
+import org.jetbrains.anko.support.v4.viewPager
 
 class ProductMainUI(
     private val viewModel: ProductMainViewModel
@@ -28,6 +32,8 @@ class ProductMainUI(
     lateinit var toolBar: Toolbar
     lateinit var drawerLayout: DrawerLayout
     lateinit var navigationView: NavigationView
+    lateinit var tabLayout: TabLayout
+    lateinit var viewpager : ViewPager
 
     override fun createView(ui: AnkoContext<ProductMainActivity>) =
         ui.drawerLayout {
@@ -43,10 +49,20 @@ class ProductMainUI(
                             .setShowAsAction(SHOW_AS_ACTION_ALWAYS)
                     }.lparams(matchParent, wrapContent)
 
+                    tabLayout = themedTabLayout(
+                        R.style.Widget_MaterialComponents_TabLayout
+                    ){
+                        bottomPadding = dip(1)
+                        tabMode = MODE_SCROLLABLE
+                        tabGravity = GRAVITY_FILL
+                        background = borderBottom(width = dip(1))
+                        lparams(matchParent, wrapContent)
+                    }
 
-
-
-                }.lparams(matchParent, matchParent)
+                    viewpager = viewPager {
+                     id = generateViewId()
+                    }.lparams(matchParent, matchParent)
+                }
 
                 floatingActionButton {
                     imageResource = R.drawable.ic_baseline_add_circle_24
