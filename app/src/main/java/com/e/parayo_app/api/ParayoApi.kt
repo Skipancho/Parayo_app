@@ -5,11 +5,13 @@ import com.e.parayo_app.api.request.SigninRequest
 import com.e.parayo_app.api.request.SignupRequest
 import com.e.parayo_app.api.response.ApiResponse
 import com.e.parayo_app.api.response.ProductImageUploadResponse
+import com.e.parayo_app.api.response.ProductListItemResponse
 import com.e.parayo_app.api.response.SigninResponse
 import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.*
 
+//메인 Api
 interface ParayoApi {
 
     @GET("/api/v1/hello")
@@ -39,6 +41,13 @@ interface ParayoApi {
     suspend fun registerProduct(
         @Body request: ProductRegistrationRequest
     ): ApiResponse<Response<Void>>
+
+    @GET("/api/v1/products")
+    suspend fun getProducts(
+        @Query("productId") productId : Long,
+        @Query("categoryId") categoryId : Int?,
+        @Query("direction") direction : String
+    ): ApiResponse<List<ProductListItemResponse>>
 
 
     companion object{
