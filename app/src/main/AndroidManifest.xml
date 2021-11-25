@@ -34,6 +34,8 @@
         </activity>
         <activity android:name=".product.registration.ProductRegistrationActivity"
             android:theme="@style/Theme.AppCompat.Light"/>
+        <activity android:name=".product.detail.ProductDetailActivity"
+            android:theme="@style/Theme.AppCompat.Light"/>
     </application>
 
 </manifest>

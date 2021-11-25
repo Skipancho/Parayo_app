@@ -3,10 +3,7 @@ package com.e.parayo_app.api
 import com.e.parayo_app.api.request.ProductRegistrationRequest
 import com.e.parayo_app.api.request.SigninRequest
 import com.e.parayo_app.api.request.SignupRequest
-import com.e.parayo_app.api.response.ApiResponse
-import com.e.parayo_app.api.response.ProductImageUploadResponse
-import com.e.parayo_app.api.response.ProductListItemResponse
-import com.e.parayo_app.api.response.SigninResponse
+import com.e.parayo_app.api.response.*
 import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.*
@@ -48,6 +45,11 @@ interface ParayoApi {
         @Query("categoryId") categoryId : Int?,
         @Query("direction") direction : String
     ): ApiResponse<List<ProductListItemResponse>>
+
+    @GET("/api/v1/products/{id}")
+    suspend fun getProduct(
+        @Path("id") id : Long
+    ):ApiResponse<ProductResponse>
 
 
     companion object{

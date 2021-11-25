@@ -27,7 +27,6 @@ class ProductListFragment : BaseFragment<ProductListViewModel>() {
         val viewModel = getViewModel()
         viewModel.categoryId = categoryId
 
-
         return ProductListUI(viewModel)
             .createView(AnkoContext.create(ctx, this))
     }
