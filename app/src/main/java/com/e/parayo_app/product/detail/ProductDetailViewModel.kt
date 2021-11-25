@@ -55,7 +55,7 @@ class ProductDetailViewModel(app : Application) : BaseViewModel(app) {
 
         productName.value = product.name
         description.value = product.description
-        price.value = "\${commaSeparatePrice} $soldOutString"
+        price.value = "₩${commaSeparatePrice} $soldOutString"
         imageUrls.addAll(product.imagePaths)
     }
 
