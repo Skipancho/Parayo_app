@@ -4,7 +4,7 @@ import androidx.paging.DataSource
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 
-interface LiveDataBuilder<K , T> {
+interface LiveDataPagedListBuilder<K , T> {
 
     fun createDataSource() : DataSource<K, T>
 
