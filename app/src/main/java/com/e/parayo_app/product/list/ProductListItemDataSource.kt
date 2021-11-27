@@ -13,7 +13,8 @@ import kotlinx.coroutines.runBlocking
 import org.jetbrains.anko.toast
 
 class ProductListItemDataSource(
-    private val categoryId : Int?
+    private val categoryId : Int?,
+    private val keyword : String? = null
 ) : PageKeyedDataSource<Long, ProductListItemResponse>(){
 
     override fun loadInitial(
@@ -70,7 +71,7 @@ class ProductListItemDataSource(
 
     private fun getProducts(id : Long, direction : String) = runBlocking {
         try {
-            ParayoApi.instance.getProducts(id,categoryId,direction)
+            ParayoApi.instance.getProducts(id, categoryId, direction, keyword)
         }catch (e : Exception){
             ApiResponse.error<List<ProductListItemResponse>>(
                 "알 수 없는 오류가 발생했습니다."

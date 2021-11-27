@@ -99,6 +99,8 @@ class ProductRegistrationViewModel(app : Application) : BaseViewModel(app){
         }else{
             toast(response.message ?: "알 수 없는 오류가 발생했습니다.")
         }
+        print("On Image Upload Response : ")
+        showImages()
     }
 
     suspend fun register(){
@@ -126,6 +128,16 @@ class ProductRegistrationViewModel(app : Application) : BaseViewModel(app){
         }else{
             toast(response.message ?: "알 수 없는 오류가 발생했습니다.")
         }
+    }
+
+    private fun showImages(){
+        print("imageIds : [")
+        for (id : Long? in imageIds){
+            id.let {
+                print("$it ")
+            }
+        }
+        println("]")
     }
 
 
