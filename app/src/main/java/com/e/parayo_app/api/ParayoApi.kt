@@ -52,6 +52,11 @@ interface ParayoApi {
         @Path("id") id : Long
     ):ApiResponse<ProductResponse>
 
+    @PUT("/api.v1/users/fcm-token")
+    suspend fun updateFcmToken(
+        fcmToken : String
+    ):ApiResponse<Response<Void>>
+
 
     companion object{
         val instance = ApiGenerator()
