@@ -57,6 +57,14 @@ interface ParayoApi {
         fcmToken : String
     ):ApiResponse<Response<Void>>
 
+    @GET("/api/v1/inquiries")
+    suspend fun getInquiries(
+        @Query("inquiryId") inquiryId : Long,
+        @Query("productId") productId: Long? = null,
+        @Query("requestUserId") requestUserId : Long? = null,
+        @Query("productOwnerId") productOwnerId : Long? = null,
+        @Query("direction") direction: String //prev, next
+    ): ApiResponse<List<InquiryResponse>>
 
     companion object{
         val instance = ApiGenerator()

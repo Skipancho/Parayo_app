@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.e.parayo_app.api.ParayoApi
 import com.e.parayo_app.api.response.ApiResponse
 import com.e.parayo_app.api.response.ProductResponse
+import com.e.parayo_app.inquiry.ProductInquiryActivity
 import com.e.parayo_app.product.ProductStatus
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -61,7 +62,9 @@ class ProductDetailViewModel(app : Application) : BaseViewModel(app) {
 
 
     fun openInquiryActivity(){
-        toast("상품 문의 - productId = $productId")
+        startActivity<ProductInquiryActivity>{
+            putExtra(ProductInquiryActivity.PRODUCT_ID, productId)
+        }
     }
 
 }
