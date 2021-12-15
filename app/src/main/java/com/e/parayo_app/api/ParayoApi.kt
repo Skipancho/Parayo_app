@@ -1,5 +1,6 @@
 package com.e.parayo_app.api
 
+import com.e.parayo_app.api.request.InquiryRequest
 import com.e.parayo_app.api.request.ProductRegistrationRequest
 import com.e.parayo_app.api.request.SigninRequest
 import com.e.parayo_app.api.request.SignupRequest
@@ -65,6 +66,11 @@ interface ParayoApi {
         @Query("productOwnerId") productOwnerId : Long? = null,
         @Query("direction") direction: String //prev, next
     ): ApiResponse<List<InquiryResponse>>
+
+    @POST("/api/v1/inquiries")
+    suspend fun registerInquiry(
+        @Body request : InquiryRequest
+    ): ApiResponse<Response<Void>>
 
     companion object{
         val instance = ApiGenerator()
