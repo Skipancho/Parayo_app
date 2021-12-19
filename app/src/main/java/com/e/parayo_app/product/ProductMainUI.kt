@@ -9,6 +9,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.viewpager.widget.ViewPager
 import com.e.parayo_app.R
 import com.e.parayo_app.common.Prefs
+import com.e.parayo_app.inquiry.myinquiry.MyInquiryActivity
 import com.e.parayo_app.signin.SigninActivity
 import com.e.parayo_app.view.borderBottom
 import com.google.android.material.navigation.NavigationView
@@ -105,7 +106,7 @@ class ProductMainUI(
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
-            MENU_ID_INQUIRY -> { viewModel.toast("나문희")}
+            MENU_ID_INQUIRY -> { viewModel.startActivity<MyInquiryActivity>()}
             MENU_ID_LOGOUT -> {
                 Prefs.token = null
                 Prefs.refreshToken = null

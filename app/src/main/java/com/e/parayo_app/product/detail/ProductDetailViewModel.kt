@@ -54,6 +54,7 @@ class ProductDetailViewModel(app : Application) : BaseViewModel(app) {
         val soldOutString =
             if(ProductStatus.SOLD_OUT == product.status) "(품절)" else ""
 
+        productId = product.id
         productName.value = product.name
         description.value = product.description
         price.value = "₩${commaSeparatePrice} $soldOutString"

@@ -14,14 +14,17 @@
         android:theme="@style/Theme.Parayo_app"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".inquiry.myinquiry.MyInquiryActivity"
+            android:exported="false"/>
+        <activity
             android:name=".inquiry.registration.InquiryRegistrationActivity"
-            android:exported="false" />
+            android:exported="false"/>
         <activity
             android:name=".signup.SignupActivity"
             android:exported="true" />
         <activity
             android:name=".signin.SigninActivity"
-            android:exported="true" />
+            android:exported="true"/>
         <activity
             android:name=".product.ProductMainActivity"
             android:exported="true" />
@@ -45,7 +48,7 @@
             android:theme="@style/Theme.AppCompat.Light" />
         <activity
             android:name=".inquiry.ProductInquiryActivity"
-            android:theme="@style/Theme.AppCompat.Light" />
+            android:theme="@style/Theme.AppCompat.Light"/>
 
         <service android:name=".fcm.ParayoMessagingService">
             <intent-filter>

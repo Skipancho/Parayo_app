@@ -34,8 +34,9 @@ class ProductInquiryUI(
                 bindVisibility(ui.owner, viewModel.inquiries){
                     it.isEmpty()
                 }
-            }.lparams(wrapContent, matchParent){
+            }.lparams(wrapContent, wrapContent){
                 gravity = Gravity.CENTER
+                weight = 1f
             }
 
             button("문의하기"){
